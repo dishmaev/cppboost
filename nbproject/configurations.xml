@@ -68,6 +68,7 @@
           <packInfoListElem name="Description" value="..." mandatory="false"/>
           <packInfoListElem name="Section" value="misc" mandatory="false"/>
           <packInfoListElem name="Priority" value="optional" mandatory="false"/>
+          <packInfoListElem name="Depends" value="libboost-regex1.62.0" mandatory="false"/>
         </packInfoList>
       </packaging>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">

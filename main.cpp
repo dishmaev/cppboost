@@ -17,14 +17,18 @@
 
 int main()
 {
-    std::string line;
+    using namespace std;
+    
+//    string line;
     boost::regex pat( "^Subject: (Re: |Aw: )*(.*)" );
+    
+    cout<<"Hello world!"<<endl;
 
-    while (std::cin)
-    {
-        std::getline(std::cin, line);
-        boost::smatch matches;
-        if (boost::regex_match(line, matches, pat))
-            std::cout << matches[2] << std::endl;
-    }
+//    while (std::cin)
+//    {
+//        getline(std::cin, line);
+//        boost::smatch matches;
+//        if (boost::regex_match(line, matches, pat))
+//            cout << matches[2] << endl;
+//    }
 }
