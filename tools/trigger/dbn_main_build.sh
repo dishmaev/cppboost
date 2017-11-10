@@ -26,6 +26,8 @@ checkRetVal
 git clone $3 build
 checkRetVal
 
+echo 'for test' > $5
+
 ##test
 
 if [ ! -f "$5" ]; then echo "Output file $5 not found"; exit 1; fi
