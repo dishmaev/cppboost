@@ -63,6 +63,10 @@ cd "${TOP}"
 makeDirectory "${NBTMPDIR}//usr/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}//usr/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
 
 # Create control file
 cd "${TOP}"
@@ -75,7 +79,7 @@ echo 'Package: cppboost' >> ${CONTROL_FILE}
 echo 'Version: 1.0.0' >> ${CONTROL_FILE}
 echo 'Architecture: amd64' >> ${CONTROL_FILE}
 echo 'Maintainer: dishmaev <idax@rambler.ru>' >> ${CONTROL_FILE}
-echo 'Description: ...' >> ${CONTROL_FILE}
+echo 'Description: Sample c++ boost application for test automation build deb and rpm packages' >> ${CONTROL_FILE}
 echo 'Section: misc' >> ${CONTROL_FILE}
 echo 'Priority: optional' >> ${CONTROL_FILE}
 echo 'Depends: libboost-regex1.62.0' >> ${CONTROL_FILE}

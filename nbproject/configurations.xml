@@ -57,6 +57,12 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
         <packInfoList>
           <packInfoListElem name="Package" value="cppboost" mandatory="true"/>
@@ -65,7 +71,9 @@
           <packInfoListElem name="Maintainer"
                             value="dishmaev &lt;idax@rambler.ru>"
                             mandatory="false"/>
-          <packInfoListElem name="Description" value="..." mandatory="false"/>
+          <packInfoListElem name="Description"
+                            value="Sample c++ boost application for test automation build deb and rpm packages"
+                            mandatory="false"/>
           <packInfoListElem name="Section" value="misc" mandatory="false"/>
           <packInfoListElem name="Priority" value="optional" mandatory="false"/>
           <packInfoListElem name="Depends" value="libboost-regex1.62.0" mandatory="false"/>
@@ -97,6 +105,12 @@
       <packaging>
         <packType>Debian</packType>
         <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
           <packFileListElem type="File"
                             to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
                             from="${OUTPUT_PATH}"
