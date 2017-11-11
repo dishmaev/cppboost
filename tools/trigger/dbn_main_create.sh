@@ -42,7 +42,9 @@ uname -a
 
 #install packages
 if [ "$2" = "run" ]; then
-  sudo apt -y install git
+  sudo apt -y install build-essential
+  checkRetVal
+  sudo apt -y install libboost-regex1.62-dev
   checkRetVal
 fi
 
@@ -52,7 +54,11 @@ activeSuiteRepository "$2"
 ##test
 
 if [ "$2" = "run" ]; then
-  git --version
+  make --version
+  checkRetVal
+  gcc --version
+  checkRetVal
+  g++ --version
   checkRetVal
 fi
 
