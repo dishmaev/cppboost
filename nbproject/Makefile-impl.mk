@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=cppboost
 
 # Active Configuration
-DEFAULTCONF=Debug
+DEFAULTCONF=Debug_APT
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug Release 
+ALLCONFS=Debug_APT Release_APT Debug_RPM Release_RPM 
 
 
 # build

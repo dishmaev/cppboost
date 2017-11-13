@@ -21,17 +21,26 @@ echo "Current build suite: $2"
 
 uname -a
 
+VAR_SUITE='Debug'
+if [ "$2" = "rel" ]; then
+  VAR_SUITE='Release'
+fi
+
 mkdir build
 checkRetVal
 tar -xvf *.tar.gz -C build/
 checkRetVal
 cd build
 checkRetVal
-make
+make -f Makefile CONF=${VAR_SUITE}_APT clean
 checkRetVal
+make -f Makefile CONF=${VAR_SUITE}_APT
+checkRetVal
+bash -x nbproject/Package-Debug_APT.bash
+checkRetVal
+cp dist/$VAR_SUITE/GNU-Linux/package/*.deb $HOME/
 
 cd $HOME
-touch $4
 
 ##test
 

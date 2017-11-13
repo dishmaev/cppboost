@@ -28,7 +28,7 @@
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="Debug" type="1">
+    <conf name="Debug_APT" type="1">
       <toolsSet>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
@@ -63,6 +63,12 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
         <packInfoList>
           <packInfoListElem name="Package" value="cppboost" mandatory="true"/>
@@ -82,7 +88,7 @@
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
-    <conf name="Release" type="1">
+    <conf name="Release_APT" type="1">
       <toolsSet>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
@@ -117,6 +123,12 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
         <packInfoList>
           <packInfoListElem name="Package" value="cppboost" mandatory="true"/>
@@ -128,6 +140,116 @@
           <packInfoListElem name="Description" value="..." mandatory="false"/>
           <packInfoListElem name="Section" value="misc" mandatory="false"/>
           <packInfoListElem name="Priority" value="optional" mandatory="false"/>
+        </packInfoList>
+      </packaging>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Debug_RPM" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <architecture>2</architecture>
+        </ccTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cppboost</output>
+          <linkerAddLib>
+            <pElem>/usr/lib/x86_64-linux-gnu</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerOptionItem>-lboost_regex</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <packaging>
+        <packType>RPM</packType>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+        <packInfoList>
+          <packInfoListElem name="Summary" value="Summary..." mandatory="true"/>
+          <packInfoListElem name="Name" value="cppboost" mandatory="true"/>
+          <packInfoListElem name="Version" value="1.0" mandatory="true"/>
+          <packInfoListElem name="Release" value="1" mandatory="true"/>
+          <packInfoListElem name="Group" value="Applications/System" mandatory="true"/>
+          <packInfoListElem name="License" value="BSD-type" mandatory="true"/>
+          <packInfoListElem name="%description" value="Description..." mandatory="true"/>
+        </packInfoList>
+      </packaging>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release_RPM" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <packaging>
+        <packType>RPM</packType>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+        <packInfoList>
+          <packInfoListElem name="Summary" value="Summary..." mandatory="true"/>
+          <packInfoListElem name="Name" value="cppboost" mandatory="true"/>
+          <packInfoListElem name="Version" value="1.0" mandatory="true"/>
+          <packInfoListElem name="Release" value="1" mandatory="true"/>
+          <packInfoListElem name="Group" value="Applications/System" mandatory="true"/>
+          <packInfoListElem name="License" value="BSD-type" mandatory="true"/>
+          <packInfoListElem name="%description" value="Description..." mandatory="true"/>
         </packInfoList>
       </packaging>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">

@@ -29,7 +29,7 @@ activeSuiteRepository(){
   elif [ "$1" = "dev" ]; then
     cat /etc/apt/sources.list.d/public-apt-dishmaev.list | grep 'apt unstable main' | sed 's/# //' | sudo tee /etc/apt/sources.list.d/public-apt-dishmaev-unstable.list
     checkRetVal
-  else
+  else #run suite
     return
   fi
 }

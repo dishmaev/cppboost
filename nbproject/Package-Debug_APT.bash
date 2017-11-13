@@ -7,7 +7,7 @@
 # Macros
 TOP=`pwd`
 CND_PLATFORM=GNU-Linux
-CND_CONF=Debug
+CND_CONF=Debug_APT
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 CND_DLIB_EXT=so
@@ -59,6 +59,10 @@ rm -rf ${NBTMPDIR}
 mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}//usr/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}//usr/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755

@@ -12,11 +12,19 @@
             <sourceRootList/>
             <confList>
                 <confElem>
-                    <name>Debug</name>
+                    <name>Debug_APT</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>Release</name>
+                    <name>Release_APT</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Debug_RPM</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Release_RPM</name>
                     <type>1</type>
                 </confElem>
             </confList>
