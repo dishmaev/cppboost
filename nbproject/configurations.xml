@@ -188,16 +188,23 @@
                             group="bin"/>
         </packFileList>
         <packInfoList>
-          <packInfoListElem name="Summary" value="Summary..." mandatory="true"/>
+          <packInfoListElem name="Summary"
+                            value="Application that used C++ Boost Libraries"
+                            mandatory="true"/>
           <packInfoListElem name="Name" value="cppboost" mandatory="true"/>
-          <packInfoListElem name="Version" value="1.0" mandatory="true"/>
+          <packInfoListElem name="Version" value="1.0.0" mandatory="true"/>
           <packInfoListElem name="Release" value="1" mandatory="true"/>
           <packInfoListElem name="Group" value="Applications/System" mandatory="true"/>
-          <packInfoListElem name="License" value="BSD-type" mandatory="true"/>
-          <packInfoListElem name="%description" value="Description..." mandatory="true"/>
+          <packInfoListElem name="License" value="MIT" mandatory="true"/>
+          <packInfoListElem name="%description"
+                            value="Sample c++ boost application for test automation build deb and rpm packages"
+                            mandatory="true"/>
+          <packInfoListElem name="Requires"
+                            value="libboost-regex1.62.0"
+                            mandatory="false"/>
         </packInfoList>
       </packaging>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="main.cpp" ex="false" tool="1" flavor2="9">
       </item>
     </conf>
     <conf name="Release_RPM" type="1">
@@ -252,7 +259,7 @@
           <packInfoListElem name="%description" value="Description..." mandatory="true"/>
         </packInfoList>
       </packaging>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="main.cpp" ex="false" tool="1" flavor2="9">
       </item>
     </conf>
   </confs>

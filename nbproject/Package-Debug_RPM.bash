@@ -99,15 +99,16 @@ rm -f ${SPEC_FILE}
 
 cd "${TOP}"
 echo BuildRoot: ${TOP}/${NBTMPDIR} >> ${SPEC_FILE}
-echo 'Summary: Summary...' >> ${SPEC_FILE}
+echo 'Summary: Application that used C++ Boost Libraries' >> ${SPEC_FILE}
 echo 'Name: cppboost' >> ${SPEC_FILE}
-echo 'Version: 1.0' >> ${SPEC_FILE}
+echo 'Version: 1.0.0' >> ${SPEC_FILE}
 echo 'Release: 1' >> ${SPEC_FILE}
 echo 'Group: Applications/System' >> ${SPEC_FILE}
-echo 'License: BSD-type' >> ${SPEC_FILE}
+echo 'License: MIT' >> ${SPEC_FILE}
 echo '%description' >> ${SPEC_FILE}
-echo 'Description...' >> ${SPEC_FILE}
+echo 'Sample c++ boost application for test automation build deb and rpm packages' >> ${SPEC_FILE}
 echo  >> ${SPEC_FILE}
+echo 'Requires: libboost-regex1.62.0' >> ${SPEC_FILE}
 echo '%files' >> ${SPEC_FILE}
 echo \"/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}\" >> ${SPEC_FILE}
 echo \"/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}\" >> ${SPEC_FILE}
