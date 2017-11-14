@@ -63,14 +63,6 @@ cd "${TOP}"
 makeDirectory "${NBTMPDIR}//usr/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
-cd "${TOP}"
-makeDirectory "${NBTMPDIR}//usr/bin"
-copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
-
-cd "${TOP}"
-makeDirectory "${NBTMPDIR}//usr/bin"
-copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
-
 
 # Create control file
 cd "${TOP}"
@@ -80,7 +72,7 @@ mkdir -p ${NBTMPDIR}/DEBIAN
 
 cd "${TOP}"
 echo 'Package: cppboost' >> ${CONTROL_FILE}
-echo 'Version: 1.0.0' >> ${CONTROL_FILE}
+echo 'Version: 0.1.0' >> ${CONTROL_FILE}
 echo 'Architecture: amd64' >> ${CONTROL_FILE}
 echo 'Maintainer: dishmaev <idax@rambler.ru>' >> ${CONTROL_FILE}
 echo 'Description: Sample c++ boost application for test automation build deb and rpm packages' >> ${CONTROL_FILE}
