@@ -2,7 +2,7 @@
 
 ###header
 
-VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 build file name'
+readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 build tar.gz file name'
 
 if [ "$#" != "3" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; exit 1; fi
 if [ -f ${1}.ok ]; then rm ${1}.ok; fi
@@ -22,10 +22,22 @@ echo "Current deploy suite: $2"
 uname -a
 
 sudo apt -y update
-sudo dpkg -i $3
-#checkRetVal
+checkRetVal
+
+tar -xvf $3
+checkRetVal
+
+#manually install packages
+for VAR_CUR_PACKAGE in $HOME/*.deb; do
+  if [ ! -r "$VAR_CUR_PACKAGE" ]; then continue; fi
+  sudo dpkg -i $VAR_CUR_PACKAGE
+  #checkRetVal
+done
+
 sudo apt -y install -f
 checkRetVal
+
+#install packages from personal repository
 #sudo apt update
 #checkRetVal
 #sudo apt -y install cppboost
