@@ -21,8 +21,8 @@ echo "Current deploy suite: $2"
 
 uname -a
 
-sudo apt -y update
-checkRetVal
+#sudo apt -y update
+#checkRetVal
 
 mkdir deploy
 checkRetVal
@@ -32,14 +32,11 @@ cd deploy
 checkRetVal
 
 #manually install packages
-for VAR_CUR_PACKAGE in ./*.deb; do
+for VAR_CUR_PACKAGE in ./*.rpm; do
   if [ ! -r "$VAR_CUR_PACKAGE" ]; then continue; fi
-  sudo dpkg -i $VAR_CUR_PACKAGE
-#  checkRetVal
+  sudo rpm -i $VAR_CUR_PACKAGE
+  checkRetVal
 done
-
-sudo apt -y install -f
-checkRetVal
 
 #install packages from personal repository
 #sudo apt update

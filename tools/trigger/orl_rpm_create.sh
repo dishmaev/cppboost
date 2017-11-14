@@ -69,6 +69,8 @@ if [ "$2" = "run" ]; then
   checkRetVal
 fi
 
+ls -l /home
+
 ###finish
 
 echo 1 > ${1}.ok
