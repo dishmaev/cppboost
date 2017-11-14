@@ -21,9 +21,6 @@ echo "Current deploy suite: $2"
 
 uname -a
 
-#sudo apt -y update
-#checkRetVal
-
 mkdir deploy
 checkRetVal
 tar -xvf $3 -C deploy/
@@ -32,17 +29,12 @@ cd deploy
 checkRetVal
 
 #manually install packages
+sudo yum -y install boost-regex
 for VAR_CUR_PACKAGE in ./*.rpm; do
   if [ ! -r "$VAR_CUR_PACKAGE" ]; then continue; fi
   sudo rpm -i $VAR_CUR_PACKAGE
   checkRetVal
 done
-
-#install packages from personal repository
-#sudo apt update
-#checkRetVal
-#sudo apt -y install cppboost
-#checkRetVal
 
 cd $HOME
 

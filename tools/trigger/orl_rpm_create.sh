@@ -17,18 +17,19 @@ checkRetVal(){
 
 #$1 suite
 activeSuiteRepository(){
+  local VAR_REPO_FILE=/etc/yum.repos.d/public-yum-dishmaev.repo
   #deactivate default repository
-  sudo sed 's/enabled=1/enabled=0/' -i /etc/yum.repos.d/public-yum-dishmaev.repo
+  sudo sed 's/enabled=1/enabled=0/' -i $VAR_REPO_FILE
   checkRetVal
   #activate required repository
   if [ "$1" = "rel" ]; then
-    sed -n '/enabled=0/=' /etc/yum.repos.d/public-yum-dishmaev.repo | sed 's:.*:&s/enabled=0/enabled=1/:' | sed -n 1p | sudo sed -f - /etc/yum.repos.d/public-yum-dishmaev.repo
+    sed -n '/enabled=0/=' $VAR_REPO_FILE | sed 's:.*:&s/enabled=0/enabled=1/:' | sed -n 1p | sed -f - $VAR_REPO_FILE | sudo tee $VAR_REPO_FILE
     checkRetVal
   elif [ "$1" = "tst" ]; then
-    sed -n '/enabled=0/=' /etc/yum.repos.d/public-yum-dishmaev.repo | sed 's:.*:&s/enabled=0/enabled=1/:' | sed -n 2p | sudo sed -f - /etc/yum.repos.d/public-yum-dishmaev.repo
+    sed -n '/enabled=0/=' $VAR_REPO_FILE | sed 's:.*:&s/enabled=0/enabled=1/:' | sed -n 2p | sed -f - $VAR_REPO_FILE | sudo tee $VAR_REPO_FILE
     checkRetVal
   elif [ "$1" = "dev" ]; then
-    sed -n '/enabled=0/=' /etc/yum.repos.d/public-yum-dishmaev.repo | sed 's:.*:&s/enabled=0/enabled=1/:' | sed -n 3p | sudo sed -f - /etc/yum.repos.d/public-yum-dishmaev.repo
+    sed -n '/enabled=0/=' $VAR_REPO_FILE | sed 's:.*:&s/enabled=0/enabled=1/:' | sed -n 3p | sed -f - $VAR_REPO_FILE | sudo tee $VAR_REPO_FILE
     checkRetVal
   else #run suite
     return
