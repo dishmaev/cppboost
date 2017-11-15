@@ -22,7 +22,7 @@ int main()
 //    string line;
     boost::regex pat( "^Subject: (Re: |Aw: )*(.*)" );
     
-    cout<<"Hello world!"<<endl;
+    cout<<"Hello world with first feature!"<<endl;
 
 //    while (std::cin)
 //    {
