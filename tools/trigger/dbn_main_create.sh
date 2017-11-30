@@ -8,6 +8,7 @@ if [ "$#" != "2" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; e
 if [ -r ${1}.ok ]; then rm ${1}.ok; fi
 exec 1>${1}.log
 exec 2>${1}.err
+exec 3>${1}.tst
 
 ###function
 
@@ -55,13 +56,13 @@ activeSuiteRepository "$2"
 ##test
 
 if [ "$2" = "run" ]; then
-  make --version
+  make --version >&3
   checkRetValOK
-  gcc --version
+  gcc --version >&3
   checkRetValOK
-  c++ --version
+  c++ --version >&3
   checkRetValOK
-  dpkg-deb --version
+  dpkg-deb --version >&3
   checkRetValOK
 fi
 

@@ -8,6 +8,7 @@ if [ "$#" != "3" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; e
 if [ -r ${1}.ok ]; then rm ${1}.ok; fi
 exec 1>${1}.log
 exec 2>${1}.err
+exec 3>${1}.tst
 
 ###function
 
@@ -50,7 +51,7 @@ fi
 
 ##test
 
-cppboost
+cppboost >&3
 checkRetValOK
 
 ###finish
