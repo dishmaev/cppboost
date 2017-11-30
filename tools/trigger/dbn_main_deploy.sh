@@ -11,7 +11,7 @@ exec 2>${1}.err
 
 ###function
 
-checkRetVal(){
+checkRetValOK(){
   if [ "$?" != "0" ]; then exit 1; fi
 }
 
@@ -21,29 +21,29 @@ echo "Current deploy suite: $2"
 
 uname -a
 
-sudo tdnf -y makecache
-checkRetVal
+sudo apt -y update
+checkRetValOK
 
 if [ "$1" = "rel" ]; then
-  install packages from personal repository
-  sudo tndf -y install cppboost
-  checkRetVal
+  #install packages from personal repository
+  sudo apt -y install cppboost
+  checkRetValOK
 else # tst,dev
   mkdir deploy
-  checkRetVal
+  checkRetValOK
   tar -xvf $3 -C deploy/
-  checkRetVal
+  checkRetValOK
   cd deploy
-  checkRetVal
+  checkRetValOK
   #manually install packages
-  for VAR_CUR_PACKAGE in ./*.rpm; do
+  for VAR_CUR_PACKAGE in ./*.deb; do
     if [ ! -r "$VAR_CUR_PACKAGE" ]; then continue; fi
-    sudo rpm -i $VAR_CUR_PACKAGE
-    checkRetVal
+    sudo apt -y install $VAR_CUR_PACKAGE
+#    checkRetValOK
   done
-#  TO-DO check dependences
-#  sudo apt -y install -f
-#  checkRetVal
+  #check all dependences
+  sudo apt -y install -f
+  checkRetValOK
 
   cd $HOME
 fi
@@ -51,7 +51,7 @@ fi
 ##test
 
 cppboost
-checkRetVal
+checkRetValOK
 
 ###finish
 
