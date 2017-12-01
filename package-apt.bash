@@ -74,7 +74,7 @@ rm -f ${CONTROL_FILE}
 mkdir -p ${NBTMPDIR}/DEBIAN
 
 cd "${TOP}"
-echo 'Package: cppqt5' >> ${CONTROL_FILE}
+echo "Package: $OUTPUT_BASENAME" >> ${CONTROL_FILE}
 cat $PACKAGE_VERSION | sed 's/^/Version: /' >> ${CONTROL_FILE}
 echo 'Architecture: amd64' >> ${CONTROL_FILE}
 echo 'Maintainer: dishmaev <idax@rambler.ru>' >> ${CONTROL_FILE}
