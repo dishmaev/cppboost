@@ -42,9 +42,9 @@ cd build
 checkRetValOK
 make -f Makefile CONF=${VAR_SUITE}_RPM QMAKE=/usr/bin/qmake
 checkRetValOK
-bash -x package-rpm.bash dist/${VAR_SUITE}_PRM/GNU-Linux $3 QMAKE=/usr/bin/qmake
+bash -x package-rpm.bash dist/${VAR_SUITE}_RPM/GNU-Linux $3 QMAKE=/usr/bin/qmake
 checkRetValOK
-tar -cvf $HOME/$4 -C dist/${VAR_SUITE}_PRM/GNU-Linux/package .
+tar -cvf $HOME/$4 -C dist/${VAR_SUITE}_RPM/GNU-Linux/package .
 checkRetValOK
 
 cd $HOME

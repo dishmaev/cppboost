@@ -64,7 +64,7 @@ mkdir -p ${NBTMPDIR}
 # Copy files and create directories and links
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}/usr/bin"
-copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Ensure proper rpm build environment
