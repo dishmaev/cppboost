@@ -15,9 +15,17 @@
 #include <iostream>
 #include <string>
 
-int main()
+int main(int argc, char *argv[])
 {
     using namespace std;
+
+    for (int i = 1; i < argc; i++) {
+        std::string str=argv[i];
+        if (str == "--version") {
+            std::cout << "cppboost version 0.1.0" << std::endl;
+        }
+        return 0;
+    }
 
 //    string line;
     boost::regex pat( "^Subject: (Re: |Aw: )*(.*)" );
