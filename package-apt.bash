@@ -78,9 +78,10 @@ echo "Package: $OUTPUT_BASENAME" >> ${CONTROL_FILE}
 cat $PACKAGE_VERSION | sed 's/^/Version: /' >> ${CONTROL_FILE}
 echo 'Architecture: amd64' >> ${CONTROL_FILE}
 echo 'Maintainer: dishmaev <idax@rambler.ru>' >> ${CONTROL_FILE}
-echo 'Description: Sample c++ qt5 application for test automation build deb and rpm packages' >> ${CONTROL_FILE}
+echo 'Description: Sample application for test automation build deb and rpm packages' >> ${CONTROL_FILE}
 echo 'Section: misc' >> ${CONTROL_FILE}
 echo 'Priority: optional' >> ${CONTROL_FILE}
+#echo 'Depends: libqt5widgets5' >> ${CONTROL_FILE}
 echo 'Depends: libboost-regex1.62.0' >> ${CONTROL_FILE}
 
 # Create Debian Package
