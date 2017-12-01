@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   main.cpp
  * Author: dmitry
  *
@@ -18,10 +18,10 @@
 int main()
 {
     using namespace std;
-    
+
 //    string line;
     boost::regex pat( "^Subject: (Re: |Aw: )*(.*)" );
-    
+
     cout<<"Hello world with first feature!"<<endl;
 
 //    while (std::cin)

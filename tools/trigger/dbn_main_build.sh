@@ -40,11 +40,9 @@ tar -xvf *.tar.gz -C build/
 checkRetValOK
 cd build
 checkRetValOK
-make -f Makefile CONF=${VAR_SUITE}_APT clean
+make -f Makefile CONF=${VAR_SUITE}_APT QMAKE=/usr/bin/qmake
 checkRetValOK
-make -f Makefile CONF=${VAR_SUITE}_APT
-checkRetValOK
-bash -x nbproject/Package-${VAR_SUITE}_APT.bash
+bash -x package-apt.bash dist/${VAR_SUITE}_APT/GNU-Linux 'cppboost' QMAKE=/usr/bin/qmake
 checkRetValOK
 tar -cvf $HOME/$4 -C dist/${VAR_SUITE}_APT/GNU-Linux/package .
 checkRetValOK
