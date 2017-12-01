@@ -2,13 +2,13 @@
 
 ###header
 
-readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 build tar.gz file name'
+readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 target, $4 build tar.gz file name'
 
-if [ "$#" != "3" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; exit 1; fi
 if [ -r ${1}.ok ]; then rm ${1}.ok; fi
 exec 1>${1}.log
 exec 2>${1}.err
 exec 3>${1}.tst
+if [ "$#" != "4" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; exit 1; fi
 
 ###function
 
@@ -24,12 +24,12 @@ uname -a
 
 if [ "$1" = "rel" ]; then
   #install packages from personal repository
-  sudo yum -y install cppboost
+  sudo yum -y install $3
   checkRetValOK
 else # tst,dev
   mkdir deploy
   checkRetValOK
-  tar -xvf $3 -C deploy/
+  tar -xvf $4 -C deploy/
   checkRetValOK
   cd deploy
   checkRetValOK
@@ -48,7 +48,7 @@ fi
 
 ##test
 
-cppboost >&3
+$3 --version >&3
 checkRetValOK
 
 ###finish

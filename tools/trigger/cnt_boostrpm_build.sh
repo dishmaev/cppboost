@@ -2,13 +2,13 @@
 
 ###header
 
-readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 build version, $4 output tar.gz file name'
+readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 target, $4 output tar.gz file name'
 
-if [ "$#" != "4" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; exit 1; fi
 if [ -r ${1}.ok ]; then rm ${1}.ok; fi
 exec 1>${1}.log
 exec 2>${1}.err
 exec 3>${1}.tst
+if [ "$#" != "4" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; exit 1; fi
 
 ###function
 
@@ -40,13 +40,11 @@ tar -xvf *.tar.gz -C build/
 checkRetValOK
 cd build
 checkRetValOK
-make -f Makefile CONF=${VAR_SUITE}_RPM clean
+make -f Makefile CONF=${VAR_SUITE}_RPM QMAKE=/usr/bin/qmake
 checkRetValOK
-make -f Makefile CONF=${VAR_SUITE}_RPM
+bash -x package-rpm.bash dist/${VAR_SUITE}_PRM/GNU-Linux $3 QMAKE=/usr/bin/qmake
 checkRetValOK
-bash -x nbproject/Package-${VAR_SUITE}_RPM.bash
-checkRetValOK
-tar -cvf $HOME/$4 -C dist/${VAR_SUITE}_RPM/GNU-Linux/package .
+tar -cvf $HOME/$4 -C dist/${VAR_SUITE}_PRM/GNU-Linux/package .
 checkRetValOK
 
 cd $HOME
