@@ -14,6 +14,7 @@
 #include <boost/regex.hpp>
 #include <iostream>
 #include <string>
+#include "package-spec.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +23,7 @@ int main(int argc, char *argv[])
     for (int i = 1; i < argc; i++) {
         std::string str=argv[i];
         if (str == "--version") {
-            std::cout << "cppboost version 0.1.0" << std::endl;
+            std::cout << "cppboost version " << CONST_PACKAGE_VERSION << std::endl;
         }
         return 0;
     }

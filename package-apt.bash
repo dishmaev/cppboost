@@ -4,18 +4,21 @@
 CND_CONF="${1}"
 OUTPUT_BASENAME="${2}"
 
+readonly CONST_PACKAGE_SPEC=package-spec.cfg
+readonly CONST_FIELD_SPEC_VERSION=CONST_PACKAGE_VERSION
+
 TOP=`pwd`
 CND_DLIB_EXT=so
 TMPDIRNAME=tmp-packaging
 NBTMPDIR=${CND_CONF}/${TMPDIRNAME}
 OUTPUT_PATH=${CND_CONF}/${OUTPUT_BASENAME}
 PACKAGE_TOP_DIR=/usr/
-PACKAGE_VERSION=package-version
+VAR_FIELD_SPEC_VERSION=`cat $CONST_PACKAGE_SPEC | grep $CONST_FIELD_SPEC_VERSION | cut -d ' ' -f 2`
 
 # Functions
-function checkPackageVersion
+function checkPackageSpec
 {
-  if [ ! -r ${PACKAGE_VERSION} ]
+  if [ ! -r ${CONST_PACKAGE_SPEC} ]
   then
     exit 1
   fi
@@ -57,7 +60,7 @@ function copyFileToTmpDir
 
 # Setup
 cd "${TOP}"
-checkPackageVersion
+checkPackageSpec
 rm -rf ${NBTMPDIR}
 mkdir -p ${NBTMPDIR}
 
@@ -75,14 +78,14 @@ mkdir -p ${NBTMPDIR}/DEBIAN
 
 cd "${TOP}"
 echo "Package: $OUTPUT_BASENAME" >> ${CONTROL_FILE}
-cat $PACKAGE_VERSION | sed 's/^/Version: /' >> ${CONTROL_FILE}
+echo "Version: $VAR_FIELD_SPEC_VERSION" >> ${CONTROL_FILE}
 echo 'Architecture: amd64' >> ${CONTROL_FILE}
 echo 'Maintainer: dishmaev <idax@rambler.ru>' >> ${CONTROL_FILE}
 echo 'Description: Sample application for test automation build deb and rpm packages' >> ${CONTROL_FILE}
 echo 'Section: misc' >> ${CONTROL_FILE}
 echo 'Priority: optional' >> ${CONTROL_FILE}
 #echo 'Depends: libqt5widgets5' >> ${CONTROL_FILE}
-echo 'Depends: libboost-regex1.62.0' >> ${CONTROL_FILE}
+#echo 'Depends: libboost-regex1.62.0' >> ${CONTROL_FILE}
 
 # Create Debian Package
 cd "${TOP}"
@@ -91,9 +94,9 @@ dpkg-deb  --build ${TMPDIRNAME}
 checkReturnCode
 cd "${TOP}"
 mkdir -p ${CND_CONF}/package
-mv ${NBTMPDIR}.deb ${CND_CONF}/package/${OUTPUT_BASENAME}-`cat $PACKAGE_VERSION`.deb
+mv ${NBTMPDIR}.deb ${CND_CONF}/package/${OUTPUT_BASENAME}-${VAR_FIELD_SPEC_VERSION}.deb
 checkReturnCode
-echo Debian: ${CND_CONF}/package/${OUTPUT_BASENAME}-`cat $PACKAGE_VERSION`.deb
+echo Debian: ${CND_CONF}/package/${OUTPUT_BASENAME}-${VAR_FIELD_SPEC_VERSION}.deb
 
 # Cleanup
 cd "${TOP}"

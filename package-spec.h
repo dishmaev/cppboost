@@ -1,0 +1,6 @@
+#ifndef PACKAGESPEC_H
+#define PACKAGESPEC_H
+
+#define CONST_PACKAGE_VERSION "0.1.0"
+
+#endif // PACKAGESPEC_H

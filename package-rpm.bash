@@ -4,17 +4,20 @@
 CND_CONF="${1}"
 OUTPUT_BASENAME="${2}"
 
+readonly CONST_PACKAGE_SPEC=package-spec.cfg
+readonly CONST_FIELD_SPEC_VERSION=CONST_PACKAGE_VERSION
+
 TOP=`pwd`
 CND_DLIB_EXT=so
 NBTMPDIR=${CND_CONF}/tmp-packaging
 OUTPUT_PATH=${CND_CONF}/${OUTPUT_BASENAME}
 PACKAGE_TOP_DIR=/usr/
-PACKAGE_VERSION=package-version
+VAR_FIELD_SPEC_VERSION=`cat $CONST_PACKAGE_SPEC | grep $CONST_FIELD_SPEC_VERSION | cut -d ' ' -f 2`
 
 # Functions
-function checkPackageVersion
+function checkPackageSpec
 {
-  if [ ! -r ${PACKAGE_VERSION} ]
+  if [ ! -r ${CONST_PACKAGE_SPEC} ]
   then
     exit 1
   fi
@@ -56,7 +59,7 @@ function copyFileToTmpDir
 
 # Setup
 cd "${TOP}"
-checkPackageVersion
+checkPackageSpec
 mkdir -p ${CND_CONF}/package
 rm -rf ${NBTMPDIR}
 mkdir -p ${NBTMPDIR}
@@ -96,7 +99,7 @@ cd "${TOP}"
 echo BuildRoot: ${TOP}/${NBTMPDIR} >> ${SPEC_FILE}
 echo 'Summary: Sample application' >> ${SPEC_FILE}
 echo "Name: ${OUTPUT_BASENAME}" >> ${SPEC_FILE}
-cat $PACKAGE_VERSION | sed 's/^/Version: /' >> ${SPEC_FILE}
+echo "Version: ${VAR_FIELD_SPEC_VERSION}" >> ${SPEC_FILE}
 echo 'Release: 1' >> ${SPEC_FILE}
 echo 'Group: Applications/System' >> ${SPEC_FILE}
 echo 'License: MIT' >> ${SPEC_FILE}
