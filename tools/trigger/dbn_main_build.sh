@@ -2,7 +2,7 @@
 
 ###header
 
-readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 target, $4 output tar.gz file name'
+readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 make output, $4 build tar.gz file name'
 
 if [ -r ${1}.ok ]; then rm ${1}.ok; fi
 exec 1>${1}.log
@@ -33,27 +33,38 @@ echo "Current build suite: $2"
 
 uname -a
 
-VAR_SUITE=$(getConfigName "$2") || exit 1
+readonly CONST_PACKAGE_SPEC=package-spec.cfg
+readonly CONST_PACKAGE_HEADER=package-spec.h
+readonly CONST_FIELD_SPEC_VERSION=CONST_PACKAGE_VERSION
+
+VAR_CONFIG=$(getConfigName "$2") || exit 1
+
 mkdir build
 checkRetValOK
 tar -xvf *.tar.gz -C build/
 checkRetValOK
 cd build
+if [ -r "$CONST_PACKAGE_HEADER" ]; then
+  echo "Upgrade $PWD/$CONST_PACKAGE_HEADER from $PWD/$CONST_PACKAGE_SPEC"
+  VAR_VERSION=$(cat $CONST_PACKAGE_SPEC | grep $CONST_FIELD_SPEC_VERSION | cut -d ' ' -f 2)
+  checkRetValOK
+  sed -i "/$CONST_FIELD_SPEC_VERSION/c #define $CONST_FIELD_SPEC_VERSION \"$VAR_VERSION\"" $CONST_PACKAGE_HEADER
+  checkRetValOK
+fi
+make -f Makefile CONF=${VAR_CONFIG}_APT QMAKE=/usr/bin/qmake
 checkRetValOK
-make -f Makefile CONF=${VAR_SUITE}_APT QMAKE=/usr/bin/qmake
+bash -x package-apt.bash dist/${VAR_CONFIG}_APT/GNU-Linux $3 QMAKE=/usr/bin/qmake
 checkRetValOK
-bash -x package-apt.bash dist/${VAR_SUITE}_APT/GNU-Linux $3 QMAKE=/usr/bin/qmake
-checkRetValOK
-tar -cvf $HOME/$4 -C dist/${VAR_SUITE}_APT/GNU-Linux/package .
+tar -cvf $HOME/$4 -C dist/${VAR_CONFIG}_APT/GNU-Linux/package .
 checkRetValOK
 
 cd $HOME
 
 ##test
 
-if [ ! -f "$4" ]; then echo "Output file $4 not found"; exit 1; fi
+if [ ! -f "$4" ]; then echo "Build file $4 not found"; exit 1; fi
 
-for VAR_CUR_PACKAGE in $HOME/build/dist/${VAR_SUITE}_APT/GNU-Linux/package/*.deb; do
+for VAR_CUR_PACKAGE in $HOME/build/dist/${VAR_CONFIG}_APT/GNU-Linux/package/*.deb; do
   if [ ! -r "$VAR_CUR_PACKAGE" ]; then continue; fi
   dpkg-deb -I $VAR_CUR_PACKAGE >&3
   checkRetValOK
