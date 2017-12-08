@@ -85,7 +85,7 @@ echo 'Description: Sample application for test automation build deb and rpm pack
 echo 'Section: misc' >> ${CONTROL_FILE}
 echo 'Priority: optional' >> ${CONTROL_FILE}
 #echo 'Depends: libqt5widgets5' >> ${CONTROL_FILE}
-#echo 'Depends: libboost-regex1.62.0' >> ${CONTROL_FILE}
+echo 'Depends: libboost-regex1.62.0' >> ${CONTROL_FILE}
 
 # Create Debian Package
 cd "${TOP}"
