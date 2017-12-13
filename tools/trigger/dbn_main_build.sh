@@ -2,13 +2,13 @@
 
 ###header
 
-readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 make output, $4 build tar.gz file name'
+readonly VAR_PARAMETERS='$1 script name without extenstion, $2 suite, $3 make output, $4 source tar.gz file name, $5 build tar.gz file name'
 
 if [ -r ${1}.ok ]; then rm ${1}.ok; fi
 exec 1>${1}.log
 exec 2>${1}.err
 exec 3>${1}.tst
-if [ "$#" != "4" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; exit 1; fi
+if [ "$#" != "5" ]; then echo "Call syntax: $(basename "$0") $VAR_PARAMETERS"; exit 1; fi
 
 ###function
 
@@ -41,7 +41,7 @@ VAR_CONFIG=$(getConfigName "$2") || exit 1
 
 mkdir build
 checkRetValOK
-tar -xvf *.tar.gz -C build/
+tar -xvf $4 -C build/
 checkRetValOK
 cd build
 if [ -r "$CONST_PACKAGE_HEADER" ]; then
@@ -55,14 +55,14 @@ make -f Makefile CONF=${VAR_CONFIG}_APT QMAKE=/usr/bin/qmake
 checkRetValOK
 bash -x package-apt.bash dist/${VAR_CONFIG}_APT/GNU-Linux $3 QMAKE=/usr/bin/qmake
 checkRetValOK
-tar -cvf $HOME/$4 -C dist/${VAR_CONFIG}_APT/GNU-Linux/package .
+tar -cvf $HOME/$5 -C dist/${VAR_CONFIG}_APT/GNU-Linux/package .
 checkRetValOK
 
 cd $HOME
 
 ##test
 
-if [ ! -f "$4" ]; then echo "Build file $4 not found"; exit 1; fi
+if [ ! -f "$5" ]; then echo "Build file $5 not found"; exit 1; fi
 
 for VAR_CUR_PACKAGE in $HOME/build/dist/${VAR_CONFIG}_APT/GNU-Linux/package/*.deb; do
   if [ ! -r "$VAR_CUR_PACKAGE" ]; then continue; fi
